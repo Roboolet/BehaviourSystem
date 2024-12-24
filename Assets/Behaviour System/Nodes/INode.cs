@@ -22,7 +22,7 @@ public abstract class ANode : INode
         return OnExecute(bb);
     }
 
-    protected NodeReturnState OnExecute(Blackboard bb)
+    protected virtual NodeReturnState OnExecute(Blackboard bb)
     {
         Debug.LogWarning("This node has no implemented behaviour");
         return NodeReturnState.ERROR;
