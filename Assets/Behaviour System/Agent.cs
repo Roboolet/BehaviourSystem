@@ -3,18 +3,7 @@ using UnityEngine;
 
 public class Agent : MonoBehaviour
 {
-    private bool _Active;
-    public bool Active
-    {
-        get
-        {
-            return _Active;
-        }
-        set
-        {
-            _Active = value;
-        }
-    }
+    public bool active = true;
     
     // [SerializeField] private BehaviourBlueprint behaviour;
     [Header("Settings")] 
@@ -29,16 +18,21 @@ public class Agent : MonoBehaviour
 
     private void Update()
     {
-        if (lastTickTime + (1 / ticksPerSecond) < Time.time)
+        if (active && lastTickTime + (1 / ticksPerSecond) < Time.time)
         {
             // set some common & useful variables
             float tickDelta = Time.time - lastTickTime;
-            blackboard.Set("tick_delta", tickDelta);
-            blackboard.Set("tick_total", tickCounter);
-            
-            root.Execute(blackboard);
             lastTickTime = Time.time;
             tickCounter++;
+            blackboard.Set("tick_delta", tickDelta);
+            blackboard.Set("tick_total", tickCounter);
+
+            if (root.Execute(blackboard) == NodeReturnState.ERROR)
+            {
+                Debug.LogError("Behaviour tree of " + transform.name + 
+                               " returns ERROR, stopping execution");
+                active = false;
+            }
         }
     }
 }

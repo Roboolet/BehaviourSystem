@@ -18,7 +18,6 @@ public abstract class ANode : INode
         {
             bb.Set("current_node", this);
         }
-        
         return OnExecute(bb);
     }
 
