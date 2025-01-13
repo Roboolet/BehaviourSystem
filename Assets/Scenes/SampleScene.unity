@@ -525,6 +525,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   active: 1
+  behaviour: {fileID: 11400000, guid: ad1ee4572a94655d7af9ef74eb507aaa, type: 2}
   ticksPerSecond: 20
 --- !u!33 &1191679721
 MeshFilter:

@@ -5,7 +5,7 @@ public class Agent : MonoBehaviour
 {
     public bool active = true;
     
-    // [SerializeField] private BehaviourBlueprint behaviour;
+    [SerializeField] private BehaviourBlueprint behaviour;
     [Header("Settings")] 
     [SerializeField, Range(0.5f,30)] private float ticksPerSecond = 20;
     
@@ -15,6 +15,11 @@ public class Agent : MonoBehaviour
     // private IEvaluator[] evaluators;
     private float lastTickTime;
     private int tickCounter;
+
+    private void Awake()
+    {
+        root = behaviour.BuildTree();
+    }
 
     private void Update()
     {
