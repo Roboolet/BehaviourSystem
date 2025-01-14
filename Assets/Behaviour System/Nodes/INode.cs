@@ -28,6 +28,17 @@ public abstract class ANode : INode
     }
 }
 
+public abstract class DecoratorNode : ANode
+{
+    public INode child;
+}
+
+public abstract class CompositeNode : ANode
+{
+    public INode[] children;
+    protected int index;
+}
+
 public enum NodeReturnState
 {
     ERROR,
