@@ -37,5 +37,18 @@ public class Blackboard
         }
     }
 
+    public T Get<T>(string key)
+    {
+        if (!objects.ContainsKey(key))
+        {
+            Debug.LogError("Blackboard does not contain key "+key);
+            return default(T);
+        }
+        else
+        {
+            return (T)objects[key];
+        }
+    }
+
     public bool ContainsKey(string key) => objects.ContainsKey(key);
 }
