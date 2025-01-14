@@ -8,10 +8,10 @@ public class SlimeBlueprint : BehaviourBlueprint
     
     public override INode BuildTree()
     {
-        INode root = new SequenceNode(new INode[]
+        INode root = new NCSequence(new INode[]
         {
-            new PrintNode(PrintNode.PrintMode.LOG, "Test Test 123"),
-            new WaitNode(1)
+            new NPrint(NPrint.PrintMode.LOG, "Test Test 123"),
+            new NWait(1)
         });
 
         return root;

@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class WaitNode : ANode
+public class NWait : ANode
 {
     private readonly float waitSeconds;
     private float startTimestamp = Mathf.NegativeInfinity;
     
-    public WaitNode(float _waitSeconds)
+    public NWait(float _waitSeconds)
     {
         waitSeconds = _waitSeconds;
     }

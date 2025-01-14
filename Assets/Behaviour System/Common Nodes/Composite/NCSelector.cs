@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class SelectorNode : CompositeNode
+public class NCSelector : NComposite
 {
-    public SelectorNode(INode[] _children) : base(_children)
+    public NCSelector(INode[] _children) : base(_children)
     {
     }
 

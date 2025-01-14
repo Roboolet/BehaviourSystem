@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class PrintNode : ANode
+public class NPrint : ANode
 {
     private readonly string message;
     private readonly PrintMode mode;
 
-    public PrintNode(PrintMode _mode, string _message)
+    public NPrint(PrintMode _mode, string _message)
     {
         message = _message;
         mode = _mode;

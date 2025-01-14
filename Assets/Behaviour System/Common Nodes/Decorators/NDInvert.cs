@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class InvertNode : DecoratorNode
+public class NDInvert : NDecorator
 {
-    public InvertNode(INode _child) : base(_child)
+    public NDInvert(INode _child) : base(_child)
     {
     }
 

@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class ParallelNode : CompositeNode
+public class NCParallel : NComposite
 {
-    public ParallelNode(INode[] _children) : base(_children)
+    public NCParallel(INode[] _children) : base(_children)
     {
     }
 

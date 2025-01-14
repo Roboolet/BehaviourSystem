@@ -28,23 +28,23 @@ public abstract class ANode : INode
     }
 }
 
-public abstract class DecoratorNode : ANode
+public abstract class NDecorator : ANode
 {
     public readonly INode child;
 
-    public DecoratorNode(INode _child)
+    public NDecorator(INode _child)
     {
         child = _child;
     }
     
 }
 
-public abstract class CompositeNode : ANode
+public abstract class NComposite : ANode
 {
     public readonly INode[] children;
     protected int index;
     
-    public CompositeNode(INode[] _children)
+    public NComposite(INode[] _children)
     {
         children = _children;
     }
@@ -52,6 +52,7 @@ public abstract class CompositeNode : ANode
 
 public enum NodeReturnState
 {
+    // error is used exclusively when something has gone horribly wrong
     ERROR,
     FAILED,
     SUCCESS,

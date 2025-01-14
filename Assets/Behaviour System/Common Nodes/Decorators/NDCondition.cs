@@ -1,10 +1,10 @@
 using System;
 using UnityEngine;
 
-public class ConditionNode : DecoratorNode
+public class NDCondition : NDecorator
 {
     private readonly Func<bool> condition;
-    public ConditionNode(INode _child, Func<bool> _condition) : base(_child)
+    public NDCondition(INode _child, Func<bool> _condition) : base(_child)
     {
         condition = _condition;
     }

@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class SequenceNode : CompositeNode
+public class NCSequence : NComposite
 {
-    public SequenceNode(INode[] _children) : base(_children)
+    public NCSequence(INode[] _children) : base(_children)
     {
     }
 
