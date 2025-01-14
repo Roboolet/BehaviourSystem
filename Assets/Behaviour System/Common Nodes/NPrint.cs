@@ -29,6 +29,7 @@ public class NPrint : ANode
         }
         return NodeReturnState.SUCCESS;
     }
-    
-    public enum PrintMode{LOG, LOG_WARNING, LOG_ERROR}
 }
+
+public enum PrintMode{LOG, LOG_WARNING, LOG_ERROR}
+

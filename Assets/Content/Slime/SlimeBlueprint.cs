@@ -10,7 +10,7 @@ public class SlimeBlueprint : BehaviourBlueprint
     {
         INode root = new NCSequence(new INode[]
         {
-            new NPrint(NPrint.PrintMode.LOG, "Test Test 123"),
+            new NPrint(PrintMode.LOG, "Test Test 123"),
             new NWait(1)
         });
 

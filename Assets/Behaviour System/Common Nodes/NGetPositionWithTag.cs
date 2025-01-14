@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class NGetPositionWithTag : ANode
 {
-    private readonly string targetTag, blackboardOutput;
+    private readonly string targetTag, blackboardKey;
 
-    public NGetPositionWithTag(string _targetTag, string _blackboardOutput)
+    public NGetPositionWithTag(string _targetTag, string _blackboardKey)
     {
         targetTag = _targetTag;
-        blackboardOutput = _blackboardOutput;
+        blackboardKey = _blackboardKey;
     }
     
     protected override NodeReturnState OnExecute(Blackboard bb)
@@ -15,7 +15,7 @@ public class NGetPositionWithTag : ANode
         GameObject go = GameObject.FindGameObjectWithTag(targetTag);
         if (go != null)
         {
-            bb.Set(blackboardOutput, go.transform.position);
+            bb.Set(blackboardKey, go.transform.position);
             return NodeReturnState.SUCCESS;
         }
 
