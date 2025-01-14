@@ -8,6 +8,12 @@ public class SlimeBlueprint : BehaviourBlueprint
     
     public override INode BuildTree()
     {
-        throw new System.NotImplementedException();
+        INode root = new SequenceNode(new INode[]
+        {
+            new PrintNode(PrintNode.PrintMode.LOG, "Test Test 123"),
+            new WaitNode(1)
+        });
+
+        return root;
     }
 }

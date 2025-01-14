@@ -18,6 +18,7 @@ public class Agent : MonoBehaviour
 
     private void Awake()
     {
+        blackboard = new Blackboard();
         root = behaviour.BuildTree();
     }
 

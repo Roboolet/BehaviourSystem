@@ -30,13 +30,24 @@ public abstract class ANode : INode
 
 public abstract class DecoratorNode : ANode
 {
-    public INode child;
+    public readonly INode child;
+
+    public DecoratorNode(INode _child)
+    {
+        child = _child;
+    }
+    
 }
 
 public abstract class CompositeNode : ANode
 {
-    public INode[] children;
+    public readonly INode[] children;
     protected int index;
+    
+    public CompositeNode(INode[] _children)
+    {
+        children = _children;
+    }
 }
 
 public enum NodeReturnState

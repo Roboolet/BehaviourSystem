@@ -4,7 +4,7 @@ using UnityEngine;
 public class ConditionNode : DecoratorNode
 {
     private readonly Func<bool> condition;
-    public ConditionNode(Func<bool> _condition)
+    public ConditionNode(INode _child, Func<bool> _condition) : base(_child)
     {
         condition = _condition;
     }

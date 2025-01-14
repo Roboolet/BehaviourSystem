@@ -2,6 +2,10 @@ using UnityEngine;
 
 public class InvertNode : DecoratorNode
 {
+    public InvertNode(INode _child) : base(_child)
+    {
+    }
+
     protected override NodeReturnState OnExecute(Blackboard bb)
     {
         NodeReturnState r = child.Execute(bb);

@@ -2,6 +2,10 @@ using UnityEngine;
 
 public class SelectorNode : CompositeNode
 {
+    public SelectorNode(INode[] _children) : base(_children)
+    {
+    }
+
     protected override NodeReturnState OnExecute(Blackboard bb)
     {
         NodeReturnState ret = children[index].Execute(bb);
