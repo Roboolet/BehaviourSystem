@@ -32,6 +32,7 @@ public class Agent : MonoBehaviour
             tickCounter++;
             blackboard.Set("tick_delta", tickDelta);
             blackboard.Set("tick_total", tickCounter);
+            blackboard.Set("agent", this);
 
             if (root.Execute(blackboard) == NodeReturnState.ERROR)
             {
