@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public interface INode
@@ -7,16 +8,33 @@ public interface INode
 
 public abstract class ANode : INode
 {
+    private readonly string nodeName;
+
+    protected ANode()
+    {
+        nodeName = this.GetType().Name;
+    }
+    
     public NodeReturnState Execute(Blackboard bb)
     {
         if (bb == null)
         {
-            Debug.LogError("This node does not have a Blackboard reference");
+            Debug.LogError(nodeName + " does not have a Blackboard reference");
             return NodeReturnState.ERROR;
         }
         else
         {
-            bb.Set("current_node", this);
+            string newPath;
+            if (bb.TryGet("common_current_node", out string oldPath))
+            {
+                newPath = oldPath + " -> " + nodeName;
+            }
+            else
+            {
+                newPath = nodeName;
+            }
+            
+            bb.Set("common_current_node", newPath);
         }
         return OnExecute(bb);
     }

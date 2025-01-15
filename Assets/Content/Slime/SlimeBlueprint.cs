@@ -13,7 +13,7 @@ public class SlimeBlueprint : BehaviourBlueprint
         INode root = new NCSequence(new INode[]
         {
             new NGetPositionWithTag("Player", TARGET),
-            //new NPrintBlackboard(PrintMode.LOG, TARGET),
+            new NPrintBlackboard(PrintMode.LOG, TARGET),
             new NMoveTowards(TARGET)
         });
         
