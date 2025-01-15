@@ -5,15 +5,18 @@ public class SlimeBlueprint : BehaviourBlueprint
 {
     public float size;
     public float speed;
+
+    private const string TARGET = "slime_target";
     
     public override INode BuildTree()
     {
         INode root = new NCSequence(new INode[]
         {
-            new NPrint(PrintMode.LOG, "Test Test 123"),
-            new NWait(1)
+            new NGetPositionWithTag("Player", TARGET),
+            //new NPrintBlackboard(PrintMode.LOG, TARGET),
+            new NMoveTowards(TARGET)
         });
-
+        
         return root;
     }
 }
