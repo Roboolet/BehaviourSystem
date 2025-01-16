@@ -45,16 +45,15 @@ public class Agent : MonoBehaviour
 
             // run the root, thereby stepping forward in the tree
             NodeReturnState rootReturn = root.Execute(blackboard);
+            if (logCurrentNode)
+            {
+                Debug.Log(blackboard.Get<string>("common_current_node"));
+            }
             if (rootReturn == NodeReturnState.ERROR)
             {
                 Debug.LogError("Behaviour tree of " + transform.name + 
                                " returns ERROR, stopping execution");
                 active = false;
-            }
-
-            if (logCurrentNode)
-            {
-                Debug.Log(blackboard.Get<string>("common_current_node"));
             }
         }
     }

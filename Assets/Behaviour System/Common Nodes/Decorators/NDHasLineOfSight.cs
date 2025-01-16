@@ -38,7 +38,7 @@ public class NDHasLineOfSight : NDecorator
             {
                 target = targetObj.transform.position;
                 
-                Ray ray = new Ray(origin, target);
+                Ray ray = new Ray(origin, (target-origin).normalized);
                 if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity))
                 {
                     if (hit.transform == targetObj.transform)
@@ -46,9 +46,10 @@ public class NDHasLineOfSight : NDecorator
                         return child.Execute(bb);
                     }
                 }
+                return NodeReturnState.FAILED;
             }
         }
 
-        return NodeReturnState.FAILED;
+        return NodeReturnState.ERROR;
     }
 }
