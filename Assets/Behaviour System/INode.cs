@@ -1,4 +1,5 @@
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public interface INode
@@ -24,10 +25,11 @@ public abstract class ANode : INode
         }
         else
         {
+            NodeReturnState ret = OnExecute(bb);
             string newPath;
             if (bb.TryGet("common_current_node", out string oldPath))
             {
-                newPath = oldPath + " -> " + nodeName;
+                newPath = oldPath + nodeName + "=" + ret.ToString() + " <- ";
             }
             else
             {
@@ -35,8 +37,8 @@ public abstract class ANode : INode
             }
             
             bb.Set("common_current_node", newPath);
+            return ret;
         }
-        return OnExecute(bb);
     }
 
     protected virtual NodeReturnState OnExecute(Blackboard bb)

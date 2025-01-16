@@ -28,6 +28,7 @@ public class Blackboard
         if (!objects.ContainsKey(key))
         {
             value = default(T);
+            Debug.LogWarning("Blackboard does not contain item with key \""+key + "\" that matches Type "+ typeof(T).Name);
             return false;
         }
         else
@@ -41,7 +42,7 @@ public class Blackboard
     {
         if (!objects.ContainsKey(key))
         {
-            Debug.LogError("Blackboard does not contain key "+key);
+            Debug.LogWarning("Blackboard does not contain item with key \""+key + "\" that matches Type "+ typeof(T).Name);
             return default(T);
         }
         else

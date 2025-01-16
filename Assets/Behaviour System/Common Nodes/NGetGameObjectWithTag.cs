@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class NGetPositionWithTag : ANode
+public class NGetGameObjectWithTag : ANode
 {
     private readonly string targetTag, blackboardKey;
 
-    public NGetPositionWithTag(string _targetTag, string _blackboardKey)
+    public NGetGameObjectWithTag(string _targetTag, string _blackboardKey)
     {
         targetTag = _targetTag;
         blackboardKey = _blackboardKey;
@@ -15,7 +15,7 @@ public class NGetPositionWithTag : ANode
         GameObject go = GameObject.FindGameObjectWithTag(targetTag);
         if (go != null)
         {
-            bb.Set(blackboardKey, go.transform.position);
+            bb.Set(blackboardKey, go);
             return NodeReturnState.SUCCESS;
         }
 

@@ -24,6 +24,7 @@ public class Agent : MonoBehaviour
         
         blackboard = new Blackboard();
         blackboard.Set("common_agent", this);
+        blackboard.Set("common_agent_gameobject", gameObject);
     }
 
     private void Update()
@@ -43,7 +44,8 @@ public class Agent : MonoBehaviour
             blackboard.Set("common_current_node", "");
 
             // run the root, thereby stepping forward in the tree
-            if (root.Execute(blackboard) == NodeReturnState.ERROR)
+            NodeReturnState rootReturn = root.Execute(blackboard);
+            if (rootReturn == NodeReturnState.ERROR)
             {
                 Debug.LogError("Behaviour tree of " + transform.name + 
                                " returns ERROR, stopping execution");

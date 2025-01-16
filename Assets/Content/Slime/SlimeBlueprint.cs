@@ -12,9 +12,10 @@ public class SlimeBlueprint : BehaviourBlueprint
     {
         INode root = new NCSequence(new INode[]
         {
-            new NGetPositionWithTag("Player", TARGET),
-            new NPrintBlackboard(PrintMode.LOG, TARGET),
-            new NMoveTowards(TARGET)
+            new NGetGameObjectWithTag("Player", TARGET),
+            new NDHasLineOfSight(
+                new NMoveTowards(TARGET, NMoveTowards.PositionReadMode.GAME_OBJECT),
+                TARGET)
         });
         
         return root;
