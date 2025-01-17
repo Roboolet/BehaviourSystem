@@ -13,17 +13,18 @@ public class NDReadBool: NDecorator
 
     protected override NodeReturnState OnExecute(Blackboard bb)
     {
-        if (bb.TryGet(blackboardKey, out bool b))
-        {
-            if(invert){b = !b;}
+        bool b = bb.Get<bool>(blackboardKey);
+        Debug.Log(b);
 
-            if (b)
-            {
-                return child.Execute(bb);
-            }
+        if(invert){b = !b;}
+
+        if (b)
+        {
+            return child.Execute(bb);
+        }
+        else
+        {
             return NodeReturnState.FAILED;
         }
-
-        return NodeReturnState.ERROR;
     }
 }

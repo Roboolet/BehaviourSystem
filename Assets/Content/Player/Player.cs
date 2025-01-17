@@ -19,6 +19,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Cursor.lockState == CursorLockMode.None) return;
+        
         // move the player
         xVelocity = Input.GetAxis("Horizontal") * (Time.deltaTime * moveSpeed);
         zVelocity = Input.GetAxis("Vertical") * (Time.deltaTime * moveSpeed);

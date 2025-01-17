@@ -7,6 +7,7 @@ public class SlimeBlueprint : BehaviourBlueprint
     private const string TARGET = "slime_target";
     private const string TARGET_DISTANCE = "slime_target_distance";
     private const string SIZE = "slime_size";
+    
     private const string IS_PATROLLING = "slime_is_patrolling";
 
     [SerializeField] private LayerMask targetLineOfSightLayer;
@@ -15,7 +16,7 @@ public class SlimeBlueprint : BehaviourBlueprint
     public override INode BuildTree()
     {
         // the red section on the diagram
-        INode branch_chasing = new NDComparison<float>(new NCSequence(
+        INode branch_chasing = new NDComparison<float>(new NCSelector(
             new INode[]
             {
                 new NMoveTowards(TARGET, PositionReadMode.GAME_OBJECT),
@@ -37,10 +38,12 @@ public class SlimeBlueprint : BehaviourBlueprint
                             new NCSequence(
                                 new INode[]
                                 {   
+                                    new NGetClosestPatrolPoint(TARGET),
                                     new NBlackboardSet(IS_PATROLLING, true)
                                 })
                             , IS_PATROLLING, true)
-                    })
+                    }),
+                new NMoveTowards(TARGET, PositionReadMode.GAME_OBJECT)
             });
         
         INode root = new NCSequence(new INode[]
@@ -53,14 +56,15 @@ public class SlimeBlueprint : BehaviourBlueprint
                 new NDHasLineOfSight(
                     new NCSequence(
                         new INode[]
-                    {
-                        new NCSelector(
-                            new INode[]
-                            {
+                        {
+                            new NBlackboardSet(IS_PATROLLING, false),
+                            new NCSelector(
+                                new INode[]
+                                {
                                 branch_chasing
-                            }) 
-                        
-                    }), TARGET, targetLineOfSightLayer)
+                            })
+                    }), TARGET, targetLineOfSightLayer),
+                branch_patrolling
             })
         });
         

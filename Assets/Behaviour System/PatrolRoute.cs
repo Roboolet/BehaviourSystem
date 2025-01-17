@@ -23,7 +23,7 @@ public class PatrolRoute : MonoBehaviour
         }
     }
 
-    public Transform GetClosestWaypoint(Vector3 position)
+    public GameObject GetClosestWaypoint(Vector3 position)
     {
         Transform closest = null;
         float closestDist = Mathf.Infinity;
@@ -39,7 +39,7 @@ public class PatrolRoute : MonoBehaviour
             }
         }
 
-        return closest;
+        return closest.gameObject;
     }
 
     public int GetIndexOfWaypoint(Transform waypoint)
@@ -56,8 +56,8 @@ public class PatrolRoute : MonoBehaviour
         return -1;
     }
 
-    public Transform GetNextWaypoint(int currentIndex)
+    public GameObject GetNextWaypoint(int currentIndex)
     {
-        return points[(currentIndex + 1) % points.Length];
+        return points[(currentIndex + 1) % points.Length].gameObject;
     }
 }
