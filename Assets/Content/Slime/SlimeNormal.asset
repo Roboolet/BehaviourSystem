@@ -12,8 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b07fef077543c1e9287d60c1b426046e, type: 3}
   m_Name: SlimeNormal
   m_EditorClassIdentifier: 
-  size: 1
-  speed: 1
+  blackboardValues:
+  - key: slime_size
+    type: 2
+    _string: 
+    _int: 0
+    _float: 1
+    _vector3: {x: 0, y: 0, z: 0}
   targetLineOfSightLayer:
     serializedVersion: 2
     m_Bits: 192

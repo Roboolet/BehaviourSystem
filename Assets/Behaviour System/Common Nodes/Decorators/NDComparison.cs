@@ -1,9 +1,10 @@
 using UnityEngine;
 using System;
 
+public enum Comparator {EQUALS, GREATER}
+
 public class NDComparison<T> : NDecorator where T : IComparable
 {
-    public enum Comparator {EQUALS, GREATER}
 
     private readonly Comparator comparator;
     private readonly bool invert;

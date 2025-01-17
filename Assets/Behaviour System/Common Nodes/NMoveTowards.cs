@@ -1,9 +1,10 @@
 using UnityEngine;
 using UnityEngine.AI;
 
+public enum PositionReadMode {VECTOR3, GAME_OBJECT}
+
 public class NMoveTowards : ANode
 {
-    public enum PositionReadMode {VECTOR3, GAME_OBJECT}
     
     private readonly string destinationBlackboardName;
     private readonly PositionReadMode moveMode;

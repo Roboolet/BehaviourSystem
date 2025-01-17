@@ -13,16 +13,19 @@ public abstract class BehaviourBlueprint : ScriptableObject
     //public abstract IEvaluator[] BuildEvaluators();
 }
 
+[System.Serializable]
 public struct BlackboardInitialValue
 {
     public string key;
     public BlackboardValueType type;
     
     // each variable is seperated so that it can be configured in the inspector
-    public string v_string;
-    public int v_int;
-    public float v_float;
-    public Vector3 v_vector3;
+    // TODO: make a custom editor for this (because it sucks)
+    [Header("Values")]
+    public string _string;
+    public int _int;
+    public float _float;
+    public Vector3 _vector3;
 }
 
 public enum BlackboardValueType
