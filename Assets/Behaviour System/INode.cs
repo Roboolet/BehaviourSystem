@@ -26,10 +26,12 @@ public abstract class ANode : INode
         else
         {
             NodeReturnState ret = OnExecute(bb);
+            
+            // log the current node, used for debugging only
             string newPath;
             if (bb.TryGet("common_current_node", out string oldPath))
             {
-                newPath = oldPath + nodeName + "=" + ret.ToString() + " <- ";
+                newPath = oldPath + nodeName + "=" + ret.ToString() + " <<-- ";
             }
             else
             {

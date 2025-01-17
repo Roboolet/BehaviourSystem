@@ -41,6 +41,7 @@ public class Agent : MonoBehaviour
 
     public string GetNodeLog()
     {
+        // to change the formatting, see INode.cs
         return blackboard.Get<string>("common_current_node");
     }
 

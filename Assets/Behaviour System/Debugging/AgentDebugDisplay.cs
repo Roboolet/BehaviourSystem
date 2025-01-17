@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using TMPro;
 using UnityEngine.Serialization;
@@ -8,20 +10,18 @@ public class AgentDebugDisplay : MonoBehaviour
 {
     [FormerlySerializedAs("text")] [SerializeField] private TMP_Text tmp;
     [SerializeField] private Agent agent;
-    [SerializeField, Range(1,100)] private int batchMax;
     private Canvas canvas;
     private Camera cam;
     private Quaternion initialRotation;
     
-    private string[] batch;
-    private int batchID;
-    private string lastAddition, firstAddition;
+    private List<string> batch;
+    private string lastNodeLog;
 
     private void Awake()
     {
         canvas = GetComponent<Canvas>();
         cam = Camera.main;
-        batch = new string[batchMax];
+        batch = new List<string>();
 
         initialRotation = transform.rotation;
     }
@@ -33,30 +33,22 @@ public class AgentDebugDisplay : MonoBehaviour
 
         // batching
         string nodeLog = agent.GetNodeLog();
-        if (batchID >= batchMax - 1 || nodeLog == firstAddition)
+        
+        if (!batch.Contains(nodeLog))
         {
-            // send batch
+            batch.Add(nodeLog);
+            lastNodeLog = nodeLog;
+        }
+        else if(nodeLog != lastNodeLog)
+        {
             string newText = "";
-            for (int i = 0; i < batchMax; i++)
+            for (int i = 0; i < batch.Count; i++)
             {
-                newText += batch[i];
+                newText += "\n" + batch[i];
             }
 
             tmp.text = newText;
-            batchID = 0;
-            batch = new string[batchMax];
-            lastAddition = "";;
-        }
-        if (nodeLog != lastAddition)
-        {
-            batch[batchID] = "\n" + nodeLog;
-            lastAddition = nodeLog;
-            if (batchID == 0)
-            {
-                firstAddition = nodeLog;
-            }
-            
-            batchID++;
+            batch.Clear();
         }
     }
 }
