@@ -26,8 +26,11 @@ public class NDComparison<T> : NDecorator where T : IComparable
             int comp = bbVal.CompareTo(value);
 
             // excuse the mess
-            if (comparator == Comparator.EQUALS && (comp == 0 || comp != 0 && invert) ||
-                (comparator == Comparator.GREATER) && (comp > 0 || (comp <= 0 && invert)))
+            bool compBool = ((comparator == Comparator.EQUALS && comp == 0) ||
+                             (comparator == Comparator.GREATER && comp > 0));
+            if (invert) { compBool = !compBool; }
+            
+            if (compBool)
             {
                 return child.Execute(bb);
             }

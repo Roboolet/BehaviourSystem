@@ -25,6 +25,18 @@ public class Agent : MonoBehaviour
         blackboard = new Blackboard();
         blackboard.Set("common_agent", this);
         blackboard.Set("common_agent_gameobject", gameObject);
+
+        for (int i = 0; i < behaviour.blackboardValues.Length; i++)
+        {
+            BlackboardInitialValue bbVal = behaviour.blackboardValues[i];
+            switch (bbVal.type)
+            {
+                case BlackboardValueType.INT: blackboard.Set(bbVal.key, bbVal._int); break;
+                case BlackboardValueType.FLOAT: blackboard.Set(bbVal.key, bbVal._float); break;
+                case BlackboardValueType.STRING: blackboard.Set(bbVal.key, bbVal._string); break;
+                case BlackboardValueType.VECTOR3: blackboard.Set(bbVal.key, bbVal._vector3); break;
+            }
+        }
     }
 
     private void Update()

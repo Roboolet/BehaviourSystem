@@ -28,13 +28,23 @@ public class Blackboard
         if (!objects.ContainsKey(key))
         {
             value = default(T);
-            Debug.LogWarning("Blackboard does not contain item with key \""+key + "\" that matches Type "+ typeof(T).Name);
+            Debug.LogWarning("Blackboard does not contain item with key \""+key);
             return false;
         }
         else
         {
-            value = (T)objects[key];
-            return true;
+            object obj = objects[key];
+            if (obj.GetType() == typeof(T))
+            {
+                value = (T)objects[key];
+                return true;
+            }
+            else
+            {
+                Debug.LogWarning("Blackboard does not contain item with key \""+key + "\" that matches Type "+ typeof(T).Name);
+                value = default(T);
+                return false;
+            }
         }
     }
 
@@ -42,12 +52,21 @@ public class Blackboard
     {
         if (!objects.ContainsKey(key))
         {
-            Debug.LogWarning("Blackboard does not contain item with key \""+key + "\" that matches Type "+ typeof(T).Name);
+            Debug.LogWarning("Blackboard does not contain item with key \""+key + "\"");
             return default(T);
         }
         else
         {
-            return (T)objects[key];
+            object obj = objects[key];
+            if (obj.GetType() == typeof(T))
+            {
+                return (T)objects[key];
+            }
+            else
+            {
+                Debug.LogWarning("Blackboard does not contain item with key \""+key + "\" that matches Type "+ typeof(T).Name);
+                return default(T);
+            }
         }
     }
 

@@ -6,35 +6,37 @@ public class NGetDistanceTo : ANode
     private readonly PositionReadMode readMode;
     private readonly string target;
     private readonly string output;
+    private readonly string origin;
     
     public NGetDistanceTo(string _targetBlackboardKey, string _outputBlackboardKey,
-        PositionReadMode _readMode) : base()
+        PositionReadMode _readMode, string _originBlackboardKey = "common_agent_gameobject") : base()
     {
         target = _targetBlackboardKey;
+        origin = _originBlackboardKey;
         output = _outputBlackboardKey;
         readMode = _readMode;
     }
 
     protected override NodeReturnState OnExecute(Blackboard bb)
     {
-        UnityEngine.Vector3 selfPos = bb.Get<GameObject>("common_agent_gameobject").transform.position;
+        UnityEngine.Vector3 selfPos = bb.Get<GameObject>(origin).transform.position;
         switch (readMode)
         {
-            case PositionReadMode.VECTOR3:
+            default:
                 if (bb.TryGet(target, out UnityEngine.Vector3 vec))
                 {
                     bb.Set(output, (vec - selfPos).magnitude);
+                    return NodeReturnState.SUCCESS;
                 }
-                return NodeReturnState.FAILED;
+                return NodeReturnState.ERROR;
             
             case PositionReadMode.GAME_OBJECT:
                 if (bb.TryGet(target, out GameObject go))
                 {
                     bb.Set(output, (go.transform.position - selfPos).magnitude);
+                    return NodeReturnState.SUCCESS;
                 }
-                return NodeReturnState.FAILED;
+                return NodeReturnState.ERROR;
         }
-
-        return NodeReturnState.ERROR;
     }
 }
