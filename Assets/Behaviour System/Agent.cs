@@ -39,6 +39,11 @@ public class Agent : MonoBehaviour
         }
     }
 
+    public string GetNodeLog()
+    {
+        return blackboard.Get<string>("common_current_node");
+    }
+
     private void Update()
     {
         if (active && lastTickTime + (1 / ticksPerSecond) < Time.time)
@@ -59,8 +64,9 @@ public class Agent : MonoBehaviour
             NodeReturnState rootReturn = root.Execute(blackboard);
             if (logCurrentNode)
             {
-                Debug.Log(blackboard.Get<string>("common_current_node"));
+                Debug.Log(GetNodeLog());
             }
+            
             if (rootReturn == NodeReturnState.ERROR)
             {
                 Debug.LogError("Behaviour tree of " + transform.name + 
