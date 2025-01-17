@@ -41,7 +41,18 @@ public class SlimeBlueprint : BehaviourBlueprint
                                     new NGetClosestPatrolPoint(TARGET),
                                     new NBlackboardSet(IS_PATROLLING, true)
                                 })
-                            , IS_PATROLLING, true)
+                            , IS_PATROLLING, true),
+                        new NCSequence(
+                            new INode[]
+                        {
+                            // when close to target patrol point, go to the next patrol point
+                            new NGetClosestPatrolPoint(TARGET),
+                            new NGetDistanceTo(TARGET, TARGET_DISTANCE, PositionReadMode.GAME_OBJECT),
+                            new NDComparison<float>(
+                                new NGetNextPatrolPoint(TARGET, TARGET),
+                                TARGET_DISTANCE, Comparator.GREATER, 2, true)
+                        })
+                        
                     }),
                 new NMoveTowards(TARGET, PositionReadMode.GAME_OBJECT)
             });

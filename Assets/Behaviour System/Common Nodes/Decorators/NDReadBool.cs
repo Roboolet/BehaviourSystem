@@ -14,7 +14,6 @@ public class NDReadBool: NDecorator
     protected override NodeReturnState OnExecute(Blackboard bb)
     {
         bool b = bb.Get<bool>(blackboardKey);
-        Debug.Log(b);
 
         if(invert){b = !b;}
 
