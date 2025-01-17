@@ -13,6 +13,7 @@ public class SlimeBlueprint : BehaviourBlueprint
     
     public override INode BuildTree()
     {
+        // the red section on the diagram
         INode branch_chasing = new NDComparison<float>(new NCSequence(
             new INode[]
             {
@@ -21,16 +22,33 @@ public class SlimeBlueprint : BehaviourBlueprint
                 new NDComparison<float>(new NAttackPlayer(), TARGET_DISTANCE, Comparator.GREATER,
                     attackDistance, true)
             }), SIZE, Comparator.GREATER, sizeThreshold);
+
+        // the blue section on the diagram
+        INode branch_patrolling = new NCSequence(
+            new INode[]
+            {
+                new NCSelector(
+                    new INode[]
+                    {
+                        
+                    })
+            });
         
         INode root = new NCSequence(new INode[]
         {
             new NGetGameObjectWithTag("Player", TARGET),
-            new NCSelector(new INode[]
+            new NCSelector(
+                new INode[]
             {
                 new NDHasLineOfSight(
-                    new NCSequence(new INode[]
+                    new NCSequence(
+                        new INode[]
                     {
-                        new NCSelector(new INode[]{branch_chasing}) 
+                        new NCSelector(
+                            new INode[]
+                            {
+                                branch_chasing
+                            }) 
                         
                     }), TARGET, targetLineOfSightLayer)
             })
