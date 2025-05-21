@@ -13,13 +13,13 @@ public class NDHasLineOfSight : NDecorator
     /// <param name="_targetBlackboardKey"></param>
     /// <param name="_layerMask"></param>
     /// <param name="_originBlackboardKey"></param>
-    public NDHasLineOfSight(INode _child, string _targetBlackboardKey, LayerMask _layerMask, string _originBlackboardKey = "common_agent_gameobject") : base(_child)
+    public NDHasLineOfSight(INode _child, string _targetBlackboardKey, LayerMask _layerMask, string _originBlackboardKey = CommonBB.AGENT_GAMEOBJECT) : base(_child)
     {
         targetBlackboardKey = _targetBlackboardKey;
         originBlackboardKey = _originBlackboardKey;
         layerMask = _layerMask;
     }
-    public NDHasLineOfSight(INode _child, string _targetBlackboardKey, string _originBlackboardKey = "common_agent_gameobject") : base(_child)
+    public NDHasLineOfSight(INode _child, string _targetBlackboardKey, string _originBlackboardKey = CommonBB.AGENT_GAMEOBJECT) : base(_child)
     {
         targetBlackboardKey = _targetBlackboardKey;
         originBlackboardKey = _originBlackboardKey;

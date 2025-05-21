@@ -23,8 +23,8 @@ public class Agent : MonoBehaviour
         root = behaviour.BuildTree();
         
         blackboard = new Blackboard();
-        blackboard.Set("common_agent", this);
-        blackboard.Set("common_agent_gameobject", gameObject);
+        blackboard.Set(CommonBB.AGENT, this);
+        blackboard.Set(CommonBB.AGENT_GAMEOBJECT, gameObject);
 
         for (int i = 0; i < behaviour.blackboardValues.Length; i++)
         {
@@ -42,7 +42,7 @@ public class Agent : MonoBehaviour
     public string GetNodeLog()
     {
         // to change the formatting, see INode.cs
-        return blackboard.Get<string>("common_current_node");
+        return blackboard.Get<string>(CommonBB.CURRENT_NODE);
     }
 
     private void Update()
@@ -53,13 +53,13 @@ public class Agent : MonoBehaviour
             float tickDelta = Time.time - lastTickTime;
             lastTickTime = Time.time;
             tickCounter++;
-            blackboard.Set("common_tick_delta", tickDelta);
-            blackboard.Set("common_tick_total", tickCounter);
+            blackboard.Set(CommonBB.TICK_DELTA, tickDelta);
+            blackboard.Set(CommonBB.TICK_TOTAL, tickCounter);
             
             // every implementation of ANode appends their node name to this, 
             // giving the "path" of the current node when the tick finishes.
             // it is necessary to clear this every tick beforehand.
-            blackboard.Set("common_current_node", "");
+            blackboard.Set(CommonBB.CURRENT_NODE, "");
 
             // run the root, thereby stepping forward in the tree
             NodeReturnState rootReturn = root.Execute(blackboard);
@@ -76,4 +76,15 @@ public class Agent : MonoBehaviour
             }
         }
     }
+}
+
+// has commonly used blackboard values
+public static class CommonBB
+{
+    public const string 
+        CURRENT_NODE = "common_current_node", 
+        TICK_DELTA = "common_tick_delta",
+        TICK_TOTAL = "common_tick_total",
+        AGENT = "common_agent",
+        AGENT_GAMEOBJECT = "common_agent_gameobject";
 }

@@ -27,7 +27,7 @@ public abstract class ANode : INode
             
             // log the current node, used for debugging only
             string newPath;
-            if (bb.TryGet("common_current_node", out string oldPath))
+            if (bb.TryGet(CommonBB.CURRENT_NODE, out string oldPath))
             {
                 newPath = oldPath + nodeName + "=" + ret.ToString() + " <<-- ";
             }
@@ -36,7 +36,7 @@ public abstract class ANode : INode
                 newPath = nodeName;
             }
             
-            bb.Set("common_current_node", newPath);
+            bb.Set(CommonBB.CURRENT_NODE, newPath);
             return ret;
         }
     }

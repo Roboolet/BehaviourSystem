@@ -21,7 +21,7 @@ public class NMoveTowards : ANode
         // get agent
         if (navAgent == null)
         {
-            if (bb.TryGet("common_agent", out Agent agent))
+            if (bb.TryGet(CommonBB.AGENT, out Agent agent))
             {
                 navAgent = agent.GetComponent<NavMeshAgent>();
             }

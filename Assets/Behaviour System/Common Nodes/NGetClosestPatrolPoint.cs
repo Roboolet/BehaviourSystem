@@ -8,7 +8,7 @@ public class NGetClosestPatrolPoint : ANode
 
     public NGetClosestPatrolPoint(string _outputBlackboardKey
         , string _patrolRouteBlackboardKey = "patrol_route"
-        , string _agentBlackboardKey = "common_agent_gameobject")
+        , string _agentBlackboardKey = CommonBB.AGENT_GAMEOBJECT)
     {
         outputBlackboardKey = _outputBlackboardKey;
         patrolRouteBlackboardKey = _patrolRouteBlackboardKey;
