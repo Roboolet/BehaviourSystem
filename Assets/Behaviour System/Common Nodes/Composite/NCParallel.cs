@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class NCParallel : NComposite
 {
-    public NCParallel(INode[] _children) : base(_children)
+    public NCParallel(params INode[] _children) : base(_children)
     {
     }
 

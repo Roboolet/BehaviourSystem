@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class NCSelector : NComposite
 {
-    public NCSelector(INode[] _children) : base(_children)
+    public NCSelector(params INode[] _children) : base(_children)
     {
     }
 

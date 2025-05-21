@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class NCSequence : NComposite
 {
-    public NCSequence(INode[] _children) : base(_children)
+    public NCSequence(params INode[] _children) : base(_children)
     {
     }
 

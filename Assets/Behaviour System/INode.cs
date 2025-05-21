@@ -64,7 +64,7 @@ public abstract class NComposite : ANode
     public readonly INode[] children;
     protected int index;
     
-    public NComposite(INode[] _children)
+    public NComposite(params INode[] _children)
     {
         children = _children;
     }
