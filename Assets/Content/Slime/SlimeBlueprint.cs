@@ -7,7 +7,6 @@ public class SlimeBlueprint : BehaviourBlueprint
     private const string TARGET = "slime_target";
     private const string TARGET_DISTANCE = "slime_target_distance";
     private const string SIZE = "slime_size";
-    
     private const string IS_PATROLLING = "slime_is_patrolling";
 
     [SerializeField] private LayerMask targetLineOfSightLayer;
