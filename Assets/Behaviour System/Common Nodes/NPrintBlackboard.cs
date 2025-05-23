@@ -5,15 +5,15 @@ public class NPrintBlackboard : ANode
     private readonly string blackboardKey;
     private readonly PrintMode mode;
     private readonly string prefix;
-
-    public NPrintBlackboard(PrintMode _mode, string _blackboardKey)
+    
+    public NPrintBlackboard(string _blackboardKey, PrintMode _mode = PrintMode.LOG)
     {
         blackboardKey = _blackboardKey;
         mode = _mode;
 
         prefix = "Blackboard key: " + blackboardKey + " = ";
     }
-    public NPrintBlackboard(PrintMode _mode, string _blackboardKey, string _prefix)
+    public NPrintBlackboard(string _blackboardKey, PrintMode _mode, string _prefix)
     {
         blackboardKey = _blackboardKey;
         mode = _mode;

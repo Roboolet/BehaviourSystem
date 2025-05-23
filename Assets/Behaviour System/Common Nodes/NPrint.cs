@@ -5,7 +5,7 @@ public class NPrint : ANode
     private readonly string message;
     private readonly PrintMode mode;
 
-    public NPrint(PrintMode _mode, string _message)
+    public NPrint(string _message, PrintMode _mode = PrintMode.LOG)
     {
         message = _message;
         mode = _mode;
