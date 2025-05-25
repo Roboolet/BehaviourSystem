@@ -453,7 +453,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 5
-  m_Acceleration: 10
+  m_Acceleration: 14
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
@@ -479,5 +479,5 @@ MonoBehaviour:
   behaviour: {fileID: 11400000, guid: bf7e6fecb728ee08fb354eea07de57af, type: 2}
   active: 1
   groupTag: 
-  ticksPerSecond: 40
+  ticksPerSecond: 60
   logCurrentNode: 0

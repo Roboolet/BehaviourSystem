@@ -17,7 +17,7 @@ public class NinjaBlueprint : BehaviourBlueprint
     [SerializeField] private string enemiesGroupTag;
     [SerializeField] private LayerMask targetLineOfSightLayer;
     [SerializeField] private float playerMinDistance, playerMaxDistance,
-        enemyMinDistance, bombTriggerDistance, smokeCooldown;
+        enemyMinDistance, bombTriggerDistance, smokeCooldown, smokeThrowWaitTime;
     [SerializeField] private GameObject smokeBombPrefab;
     [SerializeField] private NavMeshQueryFilter navFilter;
 
@@ -25,7 +25,9 @@ public class NinjaBlueprint : BehaviourBlueprint
     {
         INode throwBomb = new NCSequence(
             new NTimerSet(SMOKE_TIMER),
-            new NThrowSmokeBomb(smokeBombPrefab, TARGET_DISTANCE));
+            new NThrowSmokeBomb(smokeBombPrefab, TARGET_DISTANCE),
+            new NStopMoving(true),
+            new NWait(smokeThrowWaitTime));
         
         INode root = new NCSequence(
             new NGetAgents(ENEMY_AGENTS, enemiesGroupTag),
@@ -54,13 +56,16 @@ public class NinjaBlueprint : BehaviourBlueprint
                         
                         // player is too close
                         new NDComparison<float>(
-                            //new NMoveAwayFrom(TARGET, navFilter),
-                            new NStopMoving(),
+                            new NCSequence(
+                                new NMoveAwayFrom(TARGET, navFilter, playerMinDistance + 0.5f),
+                                new NWait(1)),
                             TARGET_DISTANCE, Comparator.GREATER, playerMinDistance, true),
                         
                         // TODO: move away from nearby enemies / throw bomb at self
                         //new NCSequence()
-                        new NPrint("Idling...")
+                        
+                        // stop ninja from walking too close
+                        new NStopMoving()
                         ), 
                     HAS_LOS),
                     new NDReadBool(

@@ -6,9 +6,11 @@ public class NMoveAwayFrom : ANode
     private readonly string bbTarget, bbOrigin;
     private readonly PositionReadMode posMode;
     private readonly NavMeshQueryFilter navFilter;
+    private readonly float idealDistance;
 
     public NMoveAwayFrom(string _targetBlackboardKey,
         NavMeshQueryFilter _navFilter,
+        float _idealDistance,
         string _originBlackboardKey = CommonBB.AGENT_GAMEOBJECT,
         PositionReadMode _posMode = PositionReadMode.GAME_OBJECT)
     {
@@ -16,6 +18,7 @@ public class NMoveAwayFrom : ANode
         bbOrigin = _originBlackboardKey;
         posMode = _posMode;
         navFilter = _navFilter;
+        idealDistance = _idealDistance;
     }
     
     protected override NodeReturnState OnExecute(Blackboard bb)
@@ -40,16 +43,17 @@ public class NMoveAwayFrom : ANode
         }
         
         // get direction from target to origin
-        Vector3 dir = (targetPosition - originPosition).normalized;
-        Vector3 destination = originPosition + dir * 10;
+        Vector3 diff = originPosition - targetPosition;
+        float mag = idealDistance - diff.magnitude;
+        Vector3 destination = originPosition + diff.normalized*mag;
         
         // check if destination is valid, if not, find closest valid point
-        NavMesh.SamplePosition(destination, out NavMeshHit hit, 0.2f, navFilter);
+        /*NavMesh.SamplePosition(destination, out NavMeshHit hit, 1f, navFilter);
         if (!hit.hit)
         {
             NavMesh.FindClosestEdge(destination, out NavMeshHit newPosHit, navFilter);
             destination = newPosHit.position;
-        }
+        }*/
         
         navAgent.isStopped = false;
         navAgent.SetDestination(destination);

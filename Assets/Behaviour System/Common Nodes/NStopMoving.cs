@@ -3,9 +3,11 @@ using UnityEngine.AI;
 
 public class NStopMoving : ANode
 {
-    public NStopMoving()
+    private readonly bool noFail;
+    
+    public NStopMoving(bool _noFail = false)
     {
-        
+        noFail = _noFail;
     }
 
     protected override NodeReturnState OnExecute(Blackboard bb)
@@ -20,6 +22,7 @@ public class NStopMoving : ANode
         }
         else
         {
+            if (noFail) return NodeReturnState.SUCCESS;
             return NodeReturnState.FAILED;
         }
     }

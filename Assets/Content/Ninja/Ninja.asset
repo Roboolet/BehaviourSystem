@@ -23,4 +23,5 @@ MonoBehaviour:
   enemyMinDistance: 6
   bombTriggerDistance: 6
   smokeCooldown: 1.2
+  smokeThrowWaitTime: 0.5
   smokeBombPrefab: {fileID: 1305014232224947380, guid: 01a62536976fb6ee2b118983eba4212b, type: 3}
