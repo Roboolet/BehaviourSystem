@@ -11,6 +11,7 @@ public class NinjaBlueprint : BehaviourBlueprint
     private const string TARGET = "ninja_target";
     private const string TARGET_DISTANCE = "ninja_target_distance";
     private const string SMOKE_TIMER = "ninja_smoke_bomb_cooldown";
+    private const string HAS_LOS = "ninja_has_los";
 
     [SerializeField] private string playerTag;
     [SerializeField] private string enemiesGroupTag;
@@ -30,32 +31,37 @@ public class NinjaBlueprint : BehaviourBlueprint
             new NGetAgents(ENEMY_AGENTS, enemiesGroupTag),
             new NGetGameObjectWithTag(playerTag, TARGET), 
             new NGetDistanceTo(TARGET, TARGET_DISTANCE, PositionReadMode.GAME_OBJECT),
+            new NGetLineOfSight(TARGET, HAS_LOS, targetLineOfSightLayer),
             new NCSelector(
-                new NDHasLineOfSight(
                     // main selector
                     new NCSelector(
-                        // move away from too close player
+                        // player is too far
                         new NDComparison<float>(
-                            new NMoveAwayFrom(TARGET, navFilter),
-                            TARGET_DISTANCE, Comparator.GREATER, playerMinDistance, true),
+                            new NMoveTowards(TARGET, PositionReadMode.GAME_OBJECT)
+                            , TARGET_DISTANCE, Comparator.GREATER, playerMaxDistance),
+                        
                         // smoke bomb is off cooldown
                         new NDTimerCheck(
-                            new NCSelector(
-                                new NDComparison<float>(
-                                    new NMoveTowards(TARGET, PositionReadMode.GAME_OBJECT)
-                                    , TARGET_DISTANCE, Comparator.GREATER, playerMaxDistance),
                                 // throw bomb when an enemy is close to the player
                                 new NCSequence(
                                     new NGetClosestGameObjectInList(ENEMY_AGENTS, ENEMY_CLOSEST, TARGET),
                                     new NGetDistanceTo(ENEMY_CLOSEST, ENEMY_CLOSEST_DISTANCE, 
                                         PositionReadMode.GAME_OBJECT, TARGET),
                                     new NDComparison<float>(throwBomb, ENEMY_CLOSEST_DISTANCE,
-                                        Comparator.GREATER, bombTriggerDistance, true)))
-                            , SMOKE_TIMER, smokeCooldown)
+                                        Comparator.GREATER, bombTriggerDistance, true))
+                            , SMOKE_TIMER, smokeCooldown),
+                        
+                        // player is too close
+                        new NDComparison<float>(
+                            //new NMoveAwayFrom(TARGET, navFilter),
+                            new NStopMoving(),
+                            TARGET_DISTANCE, Comparator.GREATER, playerMinDistance, true),
+                        
                         // TODO: move away from nearby enemies / throw bomb at self
                         //new NCSequence()
-                        ), TARGET, targetLineOfSightLayer),
-                new NMoveTowards(TARGET, PositionReadMode.GAME_OBJECT)));
+                        new NPrint("Idling...")),
+                new NMoveTowards(TARGET, PositionReadMode.GAME_OBJECT)
+                ));
         return root;
     }
 }

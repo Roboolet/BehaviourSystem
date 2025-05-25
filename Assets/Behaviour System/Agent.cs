@@ -7,7 +7,7 @@ public class Agent : MonoBehaviour
     [SerializeField] private BehaviourBlueprint behaviour;
     public bool active = true;
     public string groupTag;
-    [SerializeField, Range(0.5f,30)] private float ticksPerSecond = 20;
+    [SerializeField, Range(0.5f,60)] private float ticksPerSecond = 20;
 
     [Header("Debugging")] 
     [SerializeField] private bool logCurrentNode;

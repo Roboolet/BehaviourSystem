@@ -8,6 +8,7 @@ public class SlimeBlueprint : BehaviourBlueprint
     private const string TARGET_DISTANCE = "slime_target_distance";
     private const string SIZE = "slime_size";
     private const string IS_PATROLLING = "slime_is_patrolling";
+    private const string HAS_LOS = "slime_has_los";
 
     [SerializeField] private LayerMask targetLineOfSightLayer;
     [SerializeField] private float sizeMinimum, sizeThreshold, attackDistance;
@@ -41,16 +42,18 @@ public class SlimeBlueprint : BehaviourBlueprint
                                 TARGET_DISTANCE, Comparator.GREATER, 2, true))
                 ),
                 new NMoveTowards(TARGET, PositionReadMode.GAME_OBJECT));
-        
+
         INode root = new NCSequence(
             new NGetGameObjectWithTag("Player", TARGET),
+            new NGetLineOfSight(TARGET, HAS_LOS, targetLineOfSightLayer),
             new NCSelector(
                 // the slime sees the player, now decide to run or attack
-                new NDHasLineOfSight(
+                new NDReadBool(
                     new NCSequence(
-                            new NBlackboardSet(IS_PATROLLING, false),
-                            new NCSelector(
-                                branch_chasing)), TARGET, targetLineOfSightLayer),
+                    new NBlackboardSet(IS_PATROLLING, false),
+                    new NCSelector(
+                        branch_chasing)), HAS_LOS)
+                ,
                 branch_patrolling));
         
         return root;

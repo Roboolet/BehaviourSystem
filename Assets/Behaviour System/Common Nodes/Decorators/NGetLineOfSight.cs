@@ -1,29 +1,27 @@
 using UnityEngine;
 
-public class NDHasLineOfSight : NDecorator
+public class NGetLineOfSight : ANode
 {
     private readonly string targetBlackboardKey;
     private readonly string originBlackboardKey;
+    private readonly string outputBlackboardKey;
     private readonly LayerMask layerMask;
 
     /// <summary>
     /// Executes the child if there are no obstructions with raycast.
     /// </summary>
-    /// <param name="_child"></param>
     /// <param name="_targetBlackboardKey"></param>
     /// <param name="_layerMask"></param>
     /// <param name="_originBlackboardKey"></param>
-    public NDHasLineOfSight(INode _child, string _targetBlackboardKey, LayerMask _layerMask, string _originBlackboardKey = CommonBB.AGENT_GAMEOBJECT) : base(_child)
+    public NGetLineOfSight(string _targetBlackboardKey,
+        string _outputBlackboardKey,
+        LayerMask _layerMask,
+        string _originBlackboardKey = CommonBB.AGENT_GAMEOBJECT)
     {
         targetBlackboardKey = _targetBlackboardKey;
         originBlackboardKey = _originBlackboardKey;
+        outputBlackboardKey = _outputBlackboardKey;
         layerMask = _layerMask;
-    }
-    public NDHasLineOfSight(INode _child, string _targetBlackboardKey, string _originBlackboardKey = CommonBB.AGENT_GAMEOBJECT) : base(_child)
-    {
-        targetBlackboardKey = _targetBlackboardKey;
-        originBlackboardKey = _originBlackboardKey;
-        layerMask = ~0;
     }
 
     protected override NodeReturnState OnExecute(Blackboard bb)
@@ -43,13 +41,15 @@ public class NDHasLineOfSight : NDecorator
                 {
                     if (hit.transform == targetObj.transform)
                     {
-                        return child.Execute(bb);
+                        bb.Set(outputBlackboardKey, true);
+                        return NodeReturnState.SUCCESS;
                     }
                 }
-                return NodeReturnState.FAILED;
+                bb.Set(outputBlackboardKey, false);
+                return NodeReturnState.SUCCESS;
             }
         }
 
-        return NodeReturnState.ERROR;
+        return NodeReturnState.FAILED;
     }
 }

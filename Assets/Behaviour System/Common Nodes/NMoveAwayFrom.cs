@@ -40,7 +40,7 @@ public class NMoveAwayFrom : ANode
         }
         
         // get direction from target to origin
-        Vector3 dir = (originPosition - targetPosition).normalized;
+        Vector3 dir = (targetPosition - originPosition).normalized;
         Vector3 destination = originPosition + dir * 10;
         
         // check if destination is valid, if not, find closest valid point
