@@ -51,8 +51,6 @@ public class NMoveAwayFrom : ANode
             destination = newPosHit.position;
         }
         
-        // set speed to negative, making the agent walk backwards
-        navAgent.speed = -Mathf.Abs(navAgent.speed);
         navAgent.SetDestination(destination);
         return NodeReturnState.SUCCESS;
     }

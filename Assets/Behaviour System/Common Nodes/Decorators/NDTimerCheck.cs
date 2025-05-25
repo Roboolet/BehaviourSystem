@@ -7,6 +7,8 @@ public class NDTimerCheck : NDecorator
     
     public NDTimerCheck(INode _child, string _timerBlackboardKey, float _requiredTimeElapsed) : base(_child)
     {
+        timerBlackboardKey = _timerBlackboardKey;
+        requiredTimeElapsed = _requiredTimeElapsed;
     }
 
     protected override NodeReturnState OnExecute(Blackboard bb)

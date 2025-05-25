@@ -18,7 +18,7 @@ public class NGetAgents : ANode
     protected override NodeReturnState OnExecute(Blackboard bb)
     {
         Agent self = bb.Get<Agent>(CommonBB.AGENT);
-        List<Agent> agents = Blackboard.global.ListGet<Agent>(CommonBB.AGENTS_LIST);
+        List<Agent> agents = Blackboard.Global.ListGet<Agent>(CommonBB.AGENTS_LIST);
         if (agents == null) return NodeReturnState.ERROR;
 
         List<GameObject> filteredList = new List<GameObject>();

@@ -37,10 +37,6 @@ public class NMoveTowards : ANode
                 destination = bb.Get<GameObject>(destinationBlackboardName).transform.position;
                 break;
         }
-        
-        // set speed to positive, making the agent walk forward
-        // NMoveAwayFrom makes it negative, so this counteracts that
-        navAgent.speed = Mathf.Abs(navAgent.speed);
         navAgent.SetDestination(destination);
         return NodeReturnState.SUCCESS;
     }

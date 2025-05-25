@@ -5,7 +5,15 @@ using UnityEngine;
 
 public class Blackboard
 {
-    public static Blackboard global;
+    private static Blackboard _Global;
+    public static Blackboard Global
+    {
+        get
+        {
+            if (_Global == null) _Global = new Blackboard();
+            return _Global;
+        }
+    }
     private Hashtable objects;
 
     public Blackboard()
@@ -27,10 +35,10 @@ public class Blackboard
 
     public bool TryGet<T>(string _key, out T _value)
     {
-        if (!objects.ContainsKey(_key))
+        if (String.IsNullOrEmpty(_key) || !objects.ContainsKey(_key))
         {
             _value = default(T);
-            Debug.LogWarning("Blackboard does not contain item with key \""+_key);
+            Debug.LogWarning("Blackboard does not contain item with key \""+_key + "\"");
             return false;
         }
         else
@@ -54,7 +62,7 @@ public class Blackboard
     {
         if (!objects.ContainsKey(_key))
         {
-            Debug.LogWarning("Blackboard does not contain item with key \""+_key + "\"");
+            Debug.LogWarning("Blackboard does not contain entry with key \""+_key + "\"");
             return default(T);
         }
         else
@@ -66,7 +74,7 @@ public class Blackboard
             }
             else
             {
-                Debug.LogWarning("Blackboard does not contain item with key \""+_key + "\" that matches Type "+ typeof(T).Name);
+                Debug.LogWarning("Blackboard does not contain entry with key \""+_key + "\" that matches Type "+ typeof(T).Name);
                 return default(T);
             }
         }

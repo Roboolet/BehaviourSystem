@@ -26,7 +26,7 @@ public class Agent : MonoBehaviour
         blackboard = new Blackboard();
         blackboard.Set(CommonBB.AGENT, this);
         blackboard.Set(CommonBB.AGENT_GAMEOBJECT, gameObject);
-        Blackboard.global.ListAdd(CommonBB.AGENTS_LIST, this);
+        Blackboard.Global.ListAdd(CommonBB.AGENTS_LIST, this);
 
         for (int i = 0; i < behaviour.blackboardValues.Length; i++)
         {
