@@ -1,12 +1,13 @@
 using System;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 public class NInstantiate : ANode
 {
-    private readonly GameObject prefab;
-    private readonly string origin;
-    private readonly PositionReadMode posMode;
-    private readonly InstantiateRotationMode rotMode;
+    protected readonly GameObject prefab;
+    protected readonly string origin;
+    protected readonly PositionReadMode posMode;
+    protected readonly InstantiateRotationMode rotMode;
 
     public NInstantiate(GameObject _prefab,
         string _originBlackboardKey = CommonBB.AGENT_GAMEOBJECT,
@@ -57,10 +58,13 @@ public class NInstantiate : ANode
         }
         
         // instantiate
-        GameObject.Instantiate(prefab, pos, rot);
-        
+        GameObject obj = Object.Instantiate(prefab, pos, rot);
+        ModifyInstantiatedObject(bb, obj);
         return NodeReturnState.SUCCESS;
     }
+    
+    // modify this in overrides of this node
+    protected virtual void ModifyInstantiatedObject(Blackboard _bb, GameObject _gameObject){}
 }
 
 public enum InstantiateRotationMode
