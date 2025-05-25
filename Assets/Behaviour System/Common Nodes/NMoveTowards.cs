@@ -5,7 +5,6 @@ public enum PositionReadMode {VECTOR3, GAME_OBJECT}
 
 public class NMoveTowards : ANode
 {
-    
     private readonly string destinationBlackboardName;
     private readonly PositionReadMode moveMode;
     private NavMeshAgent navAgent;
@@ -28,25 +27,21 @@ public class NMoveTowards : ANode
         }
 
         // set destination
+        Vector3 destination = Vector3.zero;
         switch (moveMode)
         {
-            // go to position
-            default:
-                if (bb.TryGet(destinationBlackboardName, out Vector3 newDestination))
-                {
-                    navAgent.SetDestination(newDestination);
-                    return NodeReturnState.SUCCESS;
-                }
-                else return NodeReturnState.FAILED;
-            
-            // go to gameobject
+            case PositionReadMode.VECTOR3:
+                destination = bb.Get<Vector3>(destinationBlackboardName);
+                break;
             case PositionReadMode.GAME_OBJECT:
-                if (bb.TryGet(destinationBlackboardName, out GameObject targetGameObject))
-                {
-                    navAgent.SetDestination(targetGameObject.transform.position);
-                    return NodeReturnState.SUCCESS;
-                }
-                else return NodeReturnState.FAILED;
+                destination = bb.Get<GameObject>(destinationBlackboardName).transform.position;
+                break;
         }
+        
+        // set speed to positive, making the agent walk forward
+        // NMoveAwayFrom makes it negative, so this counteracts that
+        navAgent.speed = Mathf.Abs(navAgent.speed);
+        navAgent.SetDestination(destination);
+        return NodeReturnState.SUCCESS;
     }
 }
