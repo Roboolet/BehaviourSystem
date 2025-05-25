@@ -25,7 +25,7 @@ public class NinjaBlueprint : BehaviourBlueprint
     {
         INode throwBomb = new NCSequence(
             new NTimerSet(SMOKE_TIMER),
-            new NThrowSmokeBomb(smokeBombPrefab, TARGET_DISTANCE),
+            new NThrowSmokeBomb(smokeBombPrefab, TARGET),
             new NStopMoving(true),
             new NWait(smokeThrowWaitTime));
         

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8824518151594145777}
   - component: {fileID: 8528324656630157540}
   - component: {fileID: 6555609820192615988}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 2365579908160267197}
   - component: {fileID: 8874521291188758756}
   - component: {fileID: 6445916076201247324}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -204,7 +204,7 @@ GameObject:
   - component: {fileID: 8034528609862072313}
   - component: {fileID: 215748424171999787}
   - component: {fileID: 1979943446276367867}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -343,7 +343,7 @@ GameObject:
   - component: {fileID: 2191401038211809208}
   - component: {fileID: 1727925529257153335}
   - component: {fileID: 8958462132892372309}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ninja
   m_TagString: Untagged
   m_Icon: {fileID: 0}

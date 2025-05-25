@@ -2,17 +2,20 @@ using UnityEngine;
 
 public class NThrowSmokeBomb : NInstantiate
 {
-    private readonly string bbTargetDist;
+    private readonly string bbTarget;
+    private readonly PositionReadMode posMode;
     
-    public NThrowSmokeBomb(GameObject _prefab, string _targetDistanceBlackboardKey)
-        : base(_prefab, _rotMode: InstantiateRotationMode.AGENT_INHERIT)
+    public NThrowSmokeBomb(GameObject _prefab,
+        string _targetGameObjectBlackboardKey)
+        : base(_prefab)
     {
-        bbTargetDist = _targetDistanceBlackboardKey;
+        bbTarget = _targetGameObjectBlackboardKey;
     }
 
     protected override void ModifyInstantiatedObject(Blackboard _bb, GameObject _gameObject)
     {
         SmokeBomb bomb = _gameObject.GetComponent<SmokeBomb>();
-        bomb.LaunchForward(_bb.Get<float>(bbTargetDist));
+        GameObject go = _bb.Get<GameObject>(bbTarget);
+        bomb.Launch(go);
     }
 }
