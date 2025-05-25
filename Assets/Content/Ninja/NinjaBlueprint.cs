@@ -17,7 +17,7 @@ public class NinjaBlueprint : BehaviourBlueprint
     {
         INode root = new NCSequence(
             // TODO: get agent in group
-            // TODO: smoke cooldown - time deltatime
+            // TODO: decorator: time check
             new NGetGameObjectWithTag(playerTag, TARGET), 
             new NCSelector(
                 new NDHasLineOfSight(
