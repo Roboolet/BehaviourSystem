@@ -34,6 +34,7 @@ public class NinjaBlueprint : BehaviourBlueprint
             new NGetLineOfSight(TARGET, HAS_LOS, targetLineOfSightLayer),
             new NCSelector(
                     // main selector
+                    new NDReadBool(
                     new NCSelector(
                         // player is too far
                         new NDComparison<float>(
@@ -59,8 +60,12 @@ public class NinjaBlueprint : BehaviourBlueprint
                         
                         // TODO: move away from nearby enemies / throw bomb at self
                         //new NCSequence()
-                        new NPrint("Idling...")),
-                new NMoveTowards(TARGET, PositionReadMode.GAME_OBJECT)
+                        new NPrint("Idling...")
+                        ), 
+                    HAS_LOS),
+                    new NDReadBool(
+                        new NMoveTowards(TARGET, PositionReadMode.GAME_OBJECT), HAS_LOS, true)
+                
                 ));
         return root;
     }
