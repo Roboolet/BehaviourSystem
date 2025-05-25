@@ -37,6 +37,8 @@ public class NMoveTowards : ANode
                 destination = bb.Get<GameObject>(destinationBlackboardName).transform.position;
                 break;
         }
+
+        navAgent.isStopped = false;
         navAgent.SetDestination(destination);
         return NodeReturnState.SUCCESS;
     }

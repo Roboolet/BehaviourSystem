@@ -41,7 +41,7 @@ public class NMoveAwayFrom : ANode
         
         // get direction from target to origin
         Vector3 dir = (originPosition - targetPosition).normalized;
-        Vector3 destination = originPosition + dir;
+        Vector3 destination = originPosition + dir * 10;
         
         // check if destination is valid, if not, find closest valid point
         NavMesh.SamplePosition(destination, out NavMeshHit hit, 0.2f, navFilter);
@@ -51,6 +51,7 @@ public class NMoveAwayFrom : ANode
             destination = newPosHit.position;
         }
         
+        navAgent.isStopped = false;
         navAgent.SetDestination(destination);
         return NodeReturnState.SUCCESS;
     }
