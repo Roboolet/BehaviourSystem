@@ -22,6 +22,7 @@ MonoBehaviour:
   targetLineOfSightLayer:
     serializedVersion: 2
     m_Bits: 1216
-  sizeMinimum: 0.6
-  sizeThreshold: 0
+  sizeMinimum: 1
+  sizeThreshold: 1.5
   attackDistance: 3
+  fuseDistance: 1

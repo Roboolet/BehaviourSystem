@@ -41,7 +41,7 @@ public class NGetClosestGameObjectInList : ANode
             }
         }
 
-        if (closest == null) return NodeReturnState.FAILED;
+        if (closest == null) return NodeReturnState.ERROR;
         
         bb.Set(bbOutput, closest);
         return NodeReturnState.SUCCESS;

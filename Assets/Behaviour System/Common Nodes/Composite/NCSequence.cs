@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class NCSequence : NComposite
@@ -8,7 +9,16 @@ public class NCSequence : NComposite
 
     protected override NodeReturnState OnExecute(Blackboard bb)
     {
-        NodeReturnState ret = children[index].Execute(bb);
+        NodeReturnState ret = NodeReturnState.ERROR;
+        try
+        {
+            ret = children[index].Execute(bb);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("Child count: "+children.Length);
+            Debug.LogError("Index '" + index +"': " + e.Message);
+        }
 
         switch (ret)
         {
