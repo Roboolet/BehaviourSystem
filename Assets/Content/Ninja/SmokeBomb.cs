@@ -1,4 +1,5 @@
 using System;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -6,6 +7,7 @@ public class SmokeBomb : MonoBehaviour
 {
     [SerializeField] private Rigidbody rb;
     [SerializeField] private float throwForce;
+    [SerializeField] private GameObject smokePrefab;
     
     public void Launch(GameObject _target)
     {
@@ -16,8 +18,8 @@ public class SmokeBomb : MonoBehaviour
 
     public void Explode()
     {
+        Instantiate(smokePrefab, transform.position, Quaternion.identity);
         Destroy(gameObject);
-        print("boom!");
     }
 
     private void OnCollisionEnter(Collision other)

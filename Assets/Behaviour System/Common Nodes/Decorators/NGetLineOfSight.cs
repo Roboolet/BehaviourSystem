@@ -37,7 +37,7 @@ public class NGetLineOfSight : ANode
                 target = targetObj.transform.position;
                 
                 Ray ray = new Ray(origin, (target-origin).normalized);
-                if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity))
+                if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, layerMask))
                 {
                     if (hit.transform == targetObj.transform)
                     {
