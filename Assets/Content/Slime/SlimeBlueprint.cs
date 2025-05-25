@@ -38,14 +38,15 @@ public class SlimeBlueprint : BehaviourBlueprint
         
         // the red section on the diagram
         INode branch_chasing = new NDComparison<float>(
-            new NCSelector(
+            new NCSequence(
                 new NPrint("Moving towards player"),
-                new NMoveTowards(TARGET, PositionReadMode.GAME_OBJECT),
-                new NGetDistanceTo(TARGET, TARGET_DISTANCE, PositionReadMode.GAME_OBJECT),
-                // if close to player, attack
-                new NDComparison<float>(new NAttackPlayer(), TARGET_DISTANCE, Comparator.GREATER,
+                new NCSelector(
+                    new NMoveTowards(TARGET, PositionReadMode.GAME_OBJECT),
+                    new NGetDistanceTo(TARGET, TARGET_DISTANCE, PositionReadMode.GAME_OBJECT),
+                    // if close to player, attack
+                    new NDComparison<float>(new NAttackPlayer(), TARGET_DISTANCE, Comparator.GREATER,
                     attackDistance, true)
-            ), SIZE, Comparator.GREATER, sizeThreshold);
+            )), SIZE, Comparator.GREATER, sizeThreshold);
 
         // the yellow section on the diagram
         INode branch_fleeing = new NDComparison<float>(new NCSelector(

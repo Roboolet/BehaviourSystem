@@ -2440,7 +2440,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7618805200581405754, guid: 980e6bc682c91701ebbee8d8a069694f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3159,7 +3159,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7618805200581405754, guid: 980e6bc682c91701ebbee8d8a069694f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3380,6 +3380,78 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2005894111}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1446691394
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5865579495493235905, guid: 980e6bc682c91701ebbee8d8a069694f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 14.61
+      objectReference: {fileID: 0}
+    - target: {fileID: 5865579495493235905, guid: 980e6bc682c91701ebbee8d8a069694f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.58
+      objectReference: {fileID: 0}
+    - target: {fileID: 5865579495493235905, guid: 980e6bc682c91701ebbee8d8a069694f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.77
+      objectReference: {fileID: 0}
+    - target: {fileID: 5865579495493235905, guid: 980e6bc682c91701ebbee8d8a069694f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5865579495493235905, guid: 980e6bc682c91701ebbee8d8a069694f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5865579495493235905, guid: 980e6bc682c91701ebbee8d8a069694f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5865579495493235905, guid: 980e6bc682c91701ebbee8d8a069694f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5865579495493235905, guid: 980e6bc682c91701ebbee8d8a069694f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5865579495493235905, guid: 980e6bc682c91701ebbee8d8a069694f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5865579495493235905, guid: 980e6bc682c91701ebbee8d8a069694f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6070635653135882956, guid: 980e6bc682c91701ebbee8d8a069694f, type: 3}
+      propertyPath: logCurrentNode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7618805200581405754, guid: 980e6bc682c91701ebbee8d8a069694f, type: 3}
+      propertyPath: m_Name
+      value: Slime (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 980e6bc682c91701ebbee8d8a069694f, type: 3}
+--- !u!114 &1446691395 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6070635653135882956, guid: 980e6bc682c91701ebbee8d8a069694f, type: 3}
+  m_PrefabInstance: {fileID: 1446691394}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7833fa7709780325f8bb5e09564200e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1476982821
 GameObject:
   m_ObjectHideFlags: 0
@@ -3909,7 +3981,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7618805200581405754, guid: 980e6bc682c91701ebbee8d8a069694f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5289,6 +5361,7 @@ MonoBehaviour:
   agents:
   - {fileID: 902214263}
   - {fileID: 508687623}
+  - {fileID: 1446691395}
   blackboardKey: patrol_route
 --- !u!4 &2005894111
 Transform:
@@ -5902,6 +5975,7 @@ SceneRoots:
   - {fileID: 91940722}
   - {fileID: 2005894111}
   - {fileID: 3226997853014787714}
+  - {fileID: 1446691394}
   - {fileID: 508687622}
   - {fileID: 23835268}
   - {fileID: 1301340817}
