@@ -8,17 +8,8 @@ public class NCSequence : NComposite
     }
 
     protected override NodeReturnState OnExecute(Blackboard bb)
-    {
-        NodeReturnState ret = NodeReturnState.ERROR;
-        try
-        {
-            ret = children[index].Execute(bb);
-        }
-        catch (Exception e)
-        {
-            Debug.LogError("Child count: "+children.Length);
-            Debug.LogError("Index '" + index +"': " + e.Message);
-        }
+    { 
+        NodeReturnState ret = children[index].Execute(bb);
 
         switch (ret)
         {

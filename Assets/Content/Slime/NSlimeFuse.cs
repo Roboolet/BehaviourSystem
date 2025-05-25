@@ -8,6 +8,7 @@ public class NSlimeFuse : ANode
     public NSlimeFuse(string _targetBlackboardKey, string _slimeSizeBlackboardKey)
     {
         bbTarget = _targetBlackboardKey;
+        bbSize = _slimeSizeBlackboardKey;
     }
     
     protected override NodeReturnState OnExecute(Blackboard bb)
@@ -24,7 +25,7 @@ public class NSlimeFuse : ANode
         }
         else
         {
-            //Object.Destroy(self);
+            Object.Destroy(self.gameObject);
         }
         
         return NodeReturnState.SUCCESS;

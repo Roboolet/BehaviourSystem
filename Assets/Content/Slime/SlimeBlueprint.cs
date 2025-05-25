@@ -55,10 +55,7 @@ public class SlimeBlueprint : BehaviourBlueprint
                     new NGetDistanceTo(TARGET, TARGET_DISTANCE, PositionReadMode.GAME_OBJECT),
                     new NDComparison<float>(
                         new NSlimeFuse(TARGET, SIZE), 
-                        TARGET_DISTANCE, Comparator.GREATER, fuseDistance, true))),
-            // fleeing
-            new NCSequence(
-                )
+                        TARGET_DISTANCE, Comparator.GREATER, fuseDistance, true)))
         );
 
         INode root = new NCSequence(

@@ -26,6 +26,7 @@ public class NGetAgents : ANode
         for (int i = 0; i < agents.Count; i++)
         {
             Agent a = agents[i];
+            if(a == null) continue;
             
             bool isGroup = String.IsNullOrEmpty(groupTag) || a.groupTag == groupTag;
             bool notSelf = !excludeSelf || a != self;
