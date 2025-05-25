@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Blackboard
@@ -11,64 +13,84 @@ public class Blackboard
         objects = new Hashtable();
     }
     
-    public void Set(string key, object value)
+    public void Set(string _key, object _value)
     {
-        if (objects.ContainsKey(key))
+        if (objects.ContainsKey(_key))
         {
-            objects[key] = value;
+            objects[_key] = _value;
         }
         else
         {
-            objects.Add(key, value);
+            objects.Add(_key, _value);
         }
     }
 
-    public bool TryGet<T>(string key, out T value)
+    public bool TryGet<T>(string _key, out T _value)
     {
-        if (!objects.ContainsKey(key))
+        if (!objects.ContainsKey(_key))
         {
-            value = default(T);
-            Debug.LogWarning("Blackboard does not contain item with key \""+key);
+            _value = default(T);
+            Debug.LogWarning("Blackboard does not contain item with key \""+_key);
             return false;
         }
         else
         {
-            object obj = objects[key];
+            object obj = objects[_key];
             if (obj.GetType() == typeof(T))
             {
-                value = (T)objects[key];
+                _value = (T)objects[_key];
                 return true;
             }
             else
             {
-                Debug.LogWarning("Blackboard does not contain item with key \""+key + "\" that matches Type "+ typeof(T).Name);
-                value = default(T);
+                Debug.LogWarning("Blackboard does not contain item with key \""+_key + "\" that matches Type "+ typeof(T).Name);
+                _value = default(T);
                 return false;
             }
         }
     }
 
-    public T Get<T>(string key)
+    public T Get<T>(string _key)
     {
-        if (!objects.ContainsKey(key))
+        if (!objects.ContainsKey(_key))
         {
-            Debug.LogWarning("Blackboard does not contain item with key \""+key + "\"");
+            Debug.LogWarning("Blackboard does not contain item with key \""+_key + "\"");
             return default(T);
         }
         else
         {
-            object obj = objects[key];
+            object obj = objects[_key];
             if (obj.GetType() == typeof(T))
             {
-                return (T)objects[key];
+                return (T)objects[_key];
             }
             else
             {
-                Debug.LogWarning("Blackboard does not contain item with key \""+key + "\" that matches Type "+ typeof(T).Name);
+                Debug.LogWarning("Blackboard does not contain item with key \""+_key + "\" that matches Type "+ typeof(T).Name);
                 return default(T);
             }
         }
     }
 
-    public bool ContainsKey(string key) => objects.ContainsKey(key);
+    public void ListAdd<T>(string _listKey, T _value)
+    {
+        if(!ContainsKey(_listKey))
+        {
+            List<T> newList = new List<T>();
+            newList.Add(_value);
+            Set(_listKey, newList);
+        }
+        else
+        {
+            List<T> list = Get<List<T>>(_listKey);
+            list.Add(_value);
+        }
+    }
+
+    public List<T> ListGet<T>(string _listKey)
+    {
+        return Get<List<T>>(_listKey);
+    }
+
+    public bool ContainsKey(string _key) => objects.ContainsKey(_key);
 }

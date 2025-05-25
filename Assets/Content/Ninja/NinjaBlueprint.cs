@@ -17,7 +17,7 @@ public class NinjaBlueprint : BehaviourBlueprint
     public override INode BuildTree()
     {
         INode root = new NCSequence(
-            // TODO: get agent in group
+            // TODO: get enemy agents
             new NTimerSet(SMOKE_TIMER),
             new NGetGameObjectWithTag(playerTag, TARGET), 
             new NCSelector(

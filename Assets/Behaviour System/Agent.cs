@@ -1,11 +1,12 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Agent : MonoBehaviour
 {
-    public bool active = true;
-    
     [SerializeField] private BehaviourBlueprint behaviour;
+    public bool active = true;
+    public string groupTag;
     [SerializeField, Range(0.5f,30)] private float ticksPerSecond = 20;
 
     [Header("Debugging")] 
@@ -25,6 +26,7 @@ public class Agent : MonoBehaviour
         blackboard = new Blackboard();
         blackboard.Set(CommonBB.AGENT, this);
         blackboard.Set(CommonBB.AGENT_GAMEOBJECT, gameObject);
+        Blackboard.global.ListAdd(CommonBB.AGENTS_LIST, this);
 
         for (int i = 0; i < behaviour.blackboardValues.Length; i++)
         {
@@ -86,5 +88,6 @@ public static class CommonBB
         TICK_DELTA = "common_tick_delta",
         TICK_TOTAL = "common_tick_total",
         AGENT = "common_agent",
-        AGENT_GAMEOBJECT = "common_agent_gameobject";
+        AGENT_GAMEOBJECT = "common_agent_gameobject",
+        AGENTS_LIST = "common_agents_list";
 }
