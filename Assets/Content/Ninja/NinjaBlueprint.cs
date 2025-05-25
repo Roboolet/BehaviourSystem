@@ -30,7 +30,6 @@ public class NinjaBlueprint : BehaviourBlueprint
             new NWait(smokeThrowWaitTime));
         
         INode root = new NCSequence(
-            new NGetAgents(ENEMY_AGENTS, enemiesGroupTag),
             new NGetGameObjectWithTag(playerTag, TARGET), 
             new NGetDistanceTo(TARGET, TARGET_DISTANCE, PositionReadMode.GAME_OBJECT),
             new NGetLineOfSight(TARGET, HAS_LOS, targetLineOfSightLayer),
@@ -38,21 +37,22 @@ public class NinjaBlueprint : BehaviourBlueprint
                     // main selector
                     new NDReadBool(
                     new NCSelector(
+                        // smoke bomb is off cooldown
+                        new NDTimerCheck(
+                            // throw bomb when an enemy is close to the player
+                            new NCSequence(
+                                new NGetAgents(ENEMY_AGENTS, enemiesGroupTag),
+                                new NGetClosestGameObjectInList(ENEMY_AGENTS, ENEMY_CLOSEST, TARGET),
+                                new NGetDistanceTo(ENEMY_CLOSEST, ENEMY_CLOSEST_DISTANCE, 
+                                    PositionReadMode.GAME_OBJECT, TARGET),
+                                new NDComparison<float>(throwBomb, ENEMY_CLOSEST_DISTANCE,
+                                    Comparator.GREATER, bombTriggerDistance, true))
+                            , SMOKE_TIMER, smokeCooldown),
+                        
                         // player is too far
                         new NDComparison<float>(
                             new NMoveTowards(TARGET, PositionReadMode.GAME_OBJECT)
                             , TARGET_DISTANCE, Comparator.GREATER, playerMaxDistance),
-                        
-                        // smoke bomb is off cooldown
-                        new NDTimerCheck(
-                                // throw bomb when an enemy is close to the player
-                                new NCSequence(
-                                    new NGetClosestGameObjectInList(ENEMY_AGENTS, ENEMY_CLOSEST, TARGET),
-                                    new NGetDistanceTo(ENEMY_CLOSEST, ENEMY_CLOSEST_DISTANCE, 
-                                        PositionReadMode.GAME_OBJECT, TARGET),
-                                    new NDComparison<float>(throwBomb, ENEMY_CLOSEST_DISTANCE,
-                                        Comparator.GREATER, bombTriggerDistance, true))
-                            , SMOKE_TIMER, smokeCooldown),
                         
                         // player is too close
                         new NDComparison<float>(

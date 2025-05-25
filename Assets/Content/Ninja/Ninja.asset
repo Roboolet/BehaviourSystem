@@ -17,11 +17,11 @@ MonoBehaviour:
   enemiesGroupTag: Enemy
   targetLineOfSightLayer:
     serializedVersion: 2
-    m_Bits: 1216
-  playerMinDistance: 12
-  playerMaxDistance: 16
+    m_Bits: 192
+  playerMinDistance: 8
+  playerMaxDistance: 12
   enemyMinDistance: 6
-  bombTriggerDistance: 8
+  bombTriggerDistance: 12
   smokeCooldown: 1.8
   smokeThrowWaitTime: 0.5
   smokeBombPrefab: {fileID: 1305014232224947380, guid: 01a62536976fb6ee2b118983eba4212b, type: 3}
