@@ -78,7 +78,7 @@ public class SlimeBlueprint : BehaviourBlueprint
                     new NCSelector(
                         branch_chasing,
                         branch_fleeing)),
-                branch_patrolling));
+                new NDReadBool(branch_patrolling, HAS_LOS, true) ));
         
         return root;
     }
