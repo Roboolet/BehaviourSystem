@@ -130,6 +130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tmp: {fileID: 1979943446276367867}
   agent: {fileID: 8958462132892372309}
+  maxChars: 30
 --- !u!223 &2365579908160267197
 Canvas:
   m_ObjectHideFlags: 0

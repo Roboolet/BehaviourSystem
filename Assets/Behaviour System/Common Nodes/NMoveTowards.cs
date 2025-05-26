@@ -34,7 +34,13 @@ public class NMoveTowards : ANode
                 destination = bb.Get<Vector3>(destinationBlackboardName);
                 break;
             case PositionReadMode.GAME_OBJECT:
-                destination = bb.Get<GameObject>(destinationBlackboardName).transform.position;
+                GameObject go = bb.Get<GameObject>(destinationBlackboardName);
+                if (go != null)
+                {
+                    destination = go.transform.position;
+                }
+                else return NodeReturnState.FAILED;
+
                 break;
         }
 
