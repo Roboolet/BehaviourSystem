@@ -46,7 +46,7 @@ public class NGetLineOfSight : ANode
                     }
                 }
                 bb.Set(outputBlackboardKey, false);
-                return NodeReturnState.SUCCESS;
+                //return NodeReturnState.SUCCESS;
             }
         }
 

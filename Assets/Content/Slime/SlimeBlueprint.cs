@@ -13,7 +13,7 @@ public class SlimeBlueprint : BehaviourBlueprint
 
     [SerializeField] private LayerMask targetLineOfSightLayer;
     [SerializeField] private float sizeMinimum, sizeThreshold, attackDistance,
-        fuseDistance, baseSpeed;
+        fuseDistance, baseSpeed, scalingFactor;
     
     public override INode BuildTree()
     {
@@ -66,19 +66,17 @@ public class SlimeBlueprint : BehaviourBlueprint
 
         INode root = new NCSequence(
             new NGetGameObjectWithTag("Player", TARGET),
-            new NGetLineOfSight(TARGET, HAS_LOS, targetLineOfSightLayer),
-            new NSetScale(SIZE, 0.7f, 0.3f),
+            new NSetScale(SIZE, 1 - scalingFactor, scalingFactor),
             new NSlimeSetSpeed(SIZE, baseSpeed),
             new NCSelector(
                 // the slime sees the player, now decide to run or attack
-                new NDReadBool(
-                    new NCSequence(
+                new NCSequence(
+                    new NGetLineOfSight(TARGET, HAS_LOS, targetLineOfSightLayer),
                     new NBlackboardSet(IS_PATROLLING, false),
                     new NCSelector(
                         branch_chasing,
-                        branch_fleeing)), HAS_LOS)
-                ,
-                new NDReadBool(branch_patrolling, HAS_LOS, true)));
+                        branch_fleeing)),
+                branch_patrolling));
         
         return root;
     }

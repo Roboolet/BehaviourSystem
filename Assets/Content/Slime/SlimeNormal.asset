@@ -26,4 +26,5 @@ MonoBehaviour:
   sizeThreshold: 1.5
   attackDistance: 3
   fuseDistance: 1.2
-  baseSpeed: 3
+  baseSpeed: 4
+  scalingFactor: 0.4

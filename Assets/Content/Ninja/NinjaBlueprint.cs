@@ -28,11 +28,13 @@ public class NinjaBlueprint : BehaviourBlueprint
             new NThrowSmokeBomb(smokeBombPrefab, TARGET),
             new NStopMoving(true),
             new NWait(smokeThrowWaitTime));
-        
+
         INode root = new NCSequence(
-            new NGetGameObjectWithTag(playerTag, TARGET), 
+            new NGetGameObjectWithTag(playerTag, TARGET),
             new NGetDistanceTo(TARGET, TARGET_DISTANCE, PositionReadMode.GAME_OBJECT),
-            new NGetLineOfSight(TARGET, HAS_LOS, targetLineOfSightLayer),
+            new NCSelector(
+                new NGetLineOfSight(TARGET, HAS_LOS, targetLineOfSightLayer),
+                new NMoveTowards(TARGET, PositionReadMode.GAME_OBJECT)),
             new NCSelector(
                     // main selector
                     new NDReadBool(
@@ -67,10 +69,7 @@ public class NinjaBlueprint : BehaviourBlueprint
                         // stop ninja from walking too close
                         new NStopMoving()
                         ), 
-                    HAS_LOS),
-                    new NDReadBool(
-                        new NMoveTowards(TARGET, PositionReadMode.GAME_OBJECT), HAS_LOS, true)
-                
+                    HAS_LOS)
                 ));
         return root;
     }

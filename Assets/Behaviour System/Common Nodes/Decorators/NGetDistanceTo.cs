@@ -33,6 +33,10 @@ public class NGetDistanceTo : ANode
             case PositionReadMode.GAME_OBJECT:
                 if (bb.TryGet(target, out GameObject go))
                 {
+                    if (go == null)
+                    {
+                        return NodeReturnState.FAILED;
+                    }
                     bb.Set(output, (go.transform.position - selfPos).magnitude);
                     return NodeReturnState.SUCCESS;
                 }
