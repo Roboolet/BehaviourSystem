@@ -13,7 +13,7 @@ public class SlimeBlueprint : BehaviourBlueprint
 
     [SerializeField] private LayerMask targetLineOfSightLayer;
     [SerializeField] private float sizeMinimum, sizeThreshold, attackDistance,
-        fuseDistance, baseSpeed, scalingFactor;
+        fuseDistance, fuseStunTime, baseSpeed, scalingFactor;
     
     public override INode BuildTree()
     {
@@ -60,7 +60,9 @@ public class SlimeBlueprint : BehaviourBlueprint
                     new NMoveTowards(TARGET, PositionReadMode.GAME_OBJECT),
                     new NGetDistanceTo(TARGET, TARGET_DISTANCE, PositionReadMode.GAME_OBJECT),
                     new NDComparison<float>(
-                        new NSlimeFuse(TARGET, SIZE), 
+                        new NCSequence(
+                            new NSlimeFuse(TARGET, SIZE),
+                            new NWait(fuseStunTime)), 
                         TARGET_DISTANCE, Comparator.GREATER, fuseDistance, true)))
         ), SIZE, Comparator.GREATER, sizeThreshold, true);
 
