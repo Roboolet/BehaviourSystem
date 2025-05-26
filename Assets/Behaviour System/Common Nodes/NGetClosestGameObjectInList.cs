@@ -33,6 +33,8 @@ public class NGetClosestGameObjectInList : ANode
         for (int i = 0; i < gos.Count; i++)
         {
             GameObject go = gos[i];
+            if (go == null) continue;
+            
             float dist = Vector3.Distance(go.transform.position, origin);
             if (dist < closestDist)
             {

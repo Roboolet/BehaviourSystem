@@ -10,6 +10,7 @@ public class AgentDebugDisplay : MonoBehaviour
 {
     [FormerlySerializedAs("text")] [SerializeField] private TMP_Text tmp;
     [SerializeField] private Agent agent;
+    [SerializeField] private int maxChars;
     private Canvas canvas;
     private Camera cam;
     private Quaternion initialRotation;
@@ -44,7 +45,10 @@ public class AgentDebugDisplay : MonoBehaviour
             string newText = "";
             for (int i = 0; i < batch.Count; i++)
             {
-                newText += "\n" + batch[i];
+                if (!String.IsNullOrEmpty(batch[i]))
+                {
+                    newText += "\n" + batch[i].Substring(0, maxChars);
+                }
             }
 
             tmp.text = newText;
