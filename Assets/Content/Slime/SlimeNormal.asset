@@ -26,4 +26,4 @@ MonoBehaviour:
   sizeThreshold: 1.5
   attackDistance: 3
   fuseDistance: 1.2
-  baseSpeed: 2
+  baseSpeed: 3
