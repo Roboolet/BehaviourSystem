@@ -15,17 +15,19 @@ public class NSlimeFuse : ANode
     {
         Agent target = bb.Get<GameObject>(bbTarget).GetComponent<Agent>();
         Agent self = bb.Get<Agent>(CommonBB.AGENT);
+        
+        float selfSize = bb.Get<float>(bbSize);
+        float targetSize = target.blackboard.Get<float>(bbSize);
 
         if (self.transform.GetSiblingIndex() < target.transform.GetSiblingIndex())
         {
-            float selfSize = bb.Get<float>(bbSize);
-            float targetSize = target.blackboard.Get<float>(bbSize);
-            
             bb.Set(bbSize, selfSize + targetSize);
+            target.Destroy();
         }
         else
         {
-            Object.Destroy(self.gameObject);
+            target.blackboard.Set(bbSize, selfSize + targetSize);
+            self.Destroy();
         }
         
         return NodeReturnState.SUCCESS;

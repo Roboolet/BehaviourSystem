@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -77,6 +78,14 @@ public class Agent : MonoBehaviour
                 active = false;
             }
         }
+    }
+
+    public void Destroy()
+    {
+        active = false;
+        List<Agent> agents = Blackboard.Global.ListGet<Agent>(CommonBB.AGENTS_LIST);
+        agents.Remove(this);
+        Destroy(gameObject);
     }
 }
 
